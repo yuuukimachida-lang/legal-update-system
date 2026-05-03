@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>【法令アップデート】2026年4月13日週</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            apple: {
+              black:  '#1d1d1f',
+              gray:   '#f5f5f7',
+              mid:    '#d2d2d7',
+              sub:    '#6e6e73',
+              white:  '#ffffff',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Helvetica Neue', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; background-color: #f5f5f7; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; }
+
+    /* 重要度ライン */
+    .bar-high { border-left: 3px solid #1B48C4; }
+    .bar-mid  { border-left: 3px solid #6e6e73; }
+    .bar-low  { border-left: 3px solid #d2d2d7; }
+
+    /* 重要度バッジ */
+    .badge-high { background: #1B48C4; color: #fff; }
+    .badge-mid  { background: #6e6e73; color: #fff; }
+    .badge-low  { background: #d2d2d7; color: #6e6e73; }
+
+    /* サマリー行ホバー */
+    .summary-row-high:hover { background: #EEF2FC; }
+    .summary-row-high { transition: background 0.15s ease; }
+    .summary-row:hover { background: #f0f0f2; }
+    .summary-row { transition: background 0.15s ease; }
+
+    /* リンク装飾なし */
+    a { text-decoration: none; }
+
+    /* 印刷・PDF出力 */
+    @media print {
+      html { background-color: #fff; }
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+      /* 外枠の余白・影をリセット */
+      .max-w-2xl { max-width: 100% !important; margin: 0 !important; }
+      .rounded-t-2xl, .rounded-b-2xl { border-radius: 0 !important; }
+      .my-10 { margin-top: 0 !important; margin-bottom: 0 !important; }
+
+      /* フローティングボタン・「詳細を読む」ボタンを非表示 */
+      #scrollTopBtn { display: none !important; }
+      a[href="#detail-report"] { display: none !important; }
+
+      /* 詳細セクションごとにページ区切りを挿入 */
+      [id^="detail-"] { break-inside: avoid; page-break-inside: avoid; }
+      .border-t.border-apple-mid { break-after: auto; }
+
+      /* ホバー効果をリセット */
+      .summary-row-high:hover, .summary-row:hover { background: transparent !important; }
+
+      /* リンクボタンのURLを非表示（印刷では不要） */
+      a[href]::after { content: none !important; }
+
+      /* フォントサイズを印刷向けに微調整 */
+      body { font-size: 10pt; }
+    }
+  </style>
+</head>
+<body class="text-apple-black">
+
+  <!-- メール外枠 -->
+  <div class="max-w-2xl mx-auto my-10">
+
+    <!-- ヘッダー -->
+    <div class="bg-apple-white px-10 pt-10 pb-8 rounded-t-2xl border-b border-apple-mid">
+      <p class="text-xs text-apple-sub mb-1 font-light tracking-wide">
+        Legal Update System &nbsp;→&nbsp; your.name@firm.com
+      </p>
+      <p class="text-xs text-apple-sub mb-6 font-light">
+        2026年4月13日（月）&nbsp; 07:00
+      </p>
+
+      <h1 style="font-family:'Playfair Display',Georgia,serif; font-size:2.4rem; font-weight:700; letter-spacing:-0.01em; line-height:1.1; color:#1d1d1f;">
+        The Brief
+      </h1>
+      <p class="text-sm text-apple-sub mt-2 font-light tracking-wide">2026年4月7日〜4月13日</p>
+
+      <!-- 件数サマリー -->
+      <div class="flex gap-5 mt-6">
+        <div class="text-center">
+          <div class="text-2xl font-semibold" style="color:#1B48C4">3</div>
+          <div class="text-xs font-medium mt-0.5" style="color:#1B48C4">重要</div>
+        </div>
+        <div class="w-px bg-apple-mid"></div>
+        <div class="text-center">
+          <div class="text-2xl font-semibold text-apple-black">4</div>
+          <div class="text-xs text-apple-sub mt-0.5 font-light">中</div>
+        </div>
+        <div class="w-px bg-apple-mid"></div>
+        <div class="text-center">
+          <div class="text-2xl font-semibold text-apple-black">2</div>
+          <div class="text-xs text-apple-sub mt-0.5 font-light">参考</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- メイン -->
+    <div class="bg-apple-white px-10 py-10 space-y-12 rounded-b-2xl">
+
+      <!-- ━━━ サマリー ━━━ -->
+      <section id="summary">
+        <h2 class="text-xs font-semibold text-apple-sub uppercase tracking-widest mb-5">
+          今週のサマリー
+        </h2>
+
+        <!-- 会社法 -->
+        <div class="mb-8">
+          <h3 class="text-sm font-bold text-apple-black mb-3 pb-2 border-b border-apple-mid">
+            会社法
+          </h3>
+          <div class="space-y-1">
+
+            <a href="#detail-01" class="summary-row-high flex items-center gap-4 px-3 py-3 rounded-lg bar-high pl-5">
+              <span class="badge-high text-xs font-medium px-2 py-0.5 rounded shrink-0">重要</span>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-medium truncate">取締役報酬の開示要件強化（施行規則改正）</div>
+                <div class="text-xs text-apple-sub mt-0.5 font-light">上場企業（全般）　／　施行：2026年9月1日予定</div>
+              </div>
+              <span class="text-apple-sub text-xs shrink-0">↓</span>
+            </a>
+
+            <a href="#detail-02" class="summary-row flex items-center gap-4 px-3 py-3 rounded-lg bar-mid pl-5">
+              <span class="badge-mid text-xs font-medium px-2 py-0.5 rounded shrink-0">中</span>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-medium truncate">株主総会電子提供措置　Q&amp;A改訂（法務省）</div>
+                <div class="text-xs text-apple-sub mt-0.5 font-light">上場企業（全般）　／　公表：2026年4月10日</div>
+              </div>
+              <span class="text-apple-sub text-xs shrink-0">↓</span>
+            </a>
+
+          </div>
+        </div>
+
+        <!-- 金融商品取引法 -->
+        <div class="mb-8">
+          <h3 class="text-sm font-bold text-apple-black mb-3 pb-2 border-b border-apple-mid">
+            金融商品取引法
+          </h3>
+          <div class="space-y-1">
+
+            <a href="#detail-03" class="summary-row-high flex items-center gap-4 px-3 py-3 rounded-lg bar-high pl-5">
+              <span class="badge-high text-xs font-medium px-2 py-0.5 rounded shrink-0">重要</span>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-medium truncate">公開買付規制の見直し　内閣府令改正案パブコメ開始</div>
+                <div class="text-xs text-apple-sub mt-0.5 font-light">上場企業・PEファンド　／　意見締切：2026年5月12日</div>
+              </div>
+              <span class="text-apple-sub text-xs shrink-0">↓</span>
+            </a>
+
+            <a href="#detail-04" class="summary-row flex items-center gap-4 px-3 py-3 rounded-lg bar-mid pl-5">
+              <span class="badge-mid text-xs font-medium px-2 py-0.5 rounded shrink-0">中</span>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-medium truncate">有価証券報告書の記載要領改正（サステナビリティ情報拡充）</div>
+                <div class="text-xs text-apple-sub mt-0.5 font-light">上場企業・金融機関　／　2027年3月期より適用</div>
+              </div>
+              <span class="text-apple-sub text-xs shrink-0">↓</span>
+            </a>
+
+          </div>
+        </div>
+
+        <!-- REIT -->
+        <div class="mb-8">
+          <h3 class="text-sm font-bold text-apple-black mb-3 pb-2 border-b border-apple-mid">
+            REIT関連
+          </h3>
+          <div class="space-y-1">
+
+            <a href="#detail-05" class="summary-row-high flex items-center gap-4 px-3 py-3 rounded-lg bar-high pl-5">
+              <span class="badge-high text-xs font-medium px-2 py-0.5 rounded shrink-0">重要</span>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-medium truncate">投資法人の資産運用規制　内閣府令改正（パブコメ結果公表）</div>
+                <div class="text-xs text-apple-sub mt-0.5 font-light">REIT・不動産ファンド　／　施行：2026年7月1日予定</div>
+              </div>
+              <span class="text-apple-sub text-xs shrink-0">↓</span>
+            </a>
+
+            <a href="#detail-06" class="summary-row flex items-center gap-4 px-3 py-3 rounded-lg bar-low pl-5">
+              <span class="badge-low text-xs font-medium px-2 py-0.5 rounded shrink-0">参考</span>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-medium truncate">不動産特定共同事業法に関する解釈指針（国土交通省）</div>
+                <div class="text-xs text-apple-sub mt-0.5 font-light">REIT・不動産ファンド　／　公表：2026年4月8日</div>
+              </div>
+              <span class="text-apple-sub text-xs shrink-0">↓</span>
+            </a>
+
+          </div>
+        </div>
+
+        <!-- 労働法 -->
+        <div class="mb-8">
+          <h3 class="text-sm font-bold text-apple-black mb-3 pb-2 border-b border-apple-mid">
+            労働法
+          </h3>
+          <div class="space-y-1">
+
+            <a href="#detail-07" class="summary-row flex items-center gap-4 px-3 py-3 rounded-lg bar-mid pl-5">
+              <span class="badge-mid text-xs font-medium px-2 py-0.5 rounded shrink-0">中</span>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-medium truncate">育児・介護休業法施行規則改正　子の看護休暇の拡充</div>
+                <div class="text-xs text-apple-sub mt-0.5 font-light">事業会社（全般）　／　施行：2026年10月1日</div>
+              </div>
+              <span class="text-apple-sub text-xs shrink-0">↓</span>
+            </a>
+
+          </div>
+        </div>
+
+        <!-- ジェネラルコーポレート -->
+        <div class="mb-2">
+          <h3 class="text-sm font-bold text-apple-black mb-3 pb-2 border-b border-apple-mid">
+            ジェネラルコーポレート
+          </h3>
+          <div class="space-y-1">
+
+            <a href="#detail-08" class="summary-row flex items-center gap-4 px-3 py-3 rounded-lg bar-mid pl-5">
+              <span class="badge-mid text-xs font-medium px-2 py-0.5 rounded shrink-0">中</span>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-medium truncate">個人情報保護法ガイドライン改訂（委託先管理の強化）</div>
+                <div class="text-xs text-apple-sub mt-0.5 font-light">事業会社・金融機関　／　公表：2026年4月9日</div>
+              </div>
+              <span class="text-apple-sub text-xs shrink-0">↓</span>
+            </a>
+
+            <a href="#detail-09" class="summary-row flex items-center gap-4 px-3 py-3 rounded-lg bar-low pl-5">
+              <span class="badge-low text-xs font-medium px-2 py-0.5 rounded shrink-0">参考</span>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-medium truncate">最高裁判決　取締役第三者責任（会社法429条）の判断基準</div>
+                <div class="text-xs text-apple-sub mt-0.5 font-light">上場企業・事業会社　／　判決：2026年4月3日</div>
+              </div>
+              <span class="text-apple-sub text-xs shrink-0">↓</span>
+            </a>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- サマリー → 詳細ジャンプ -->
+      <div class="text-center pt-2">
+        <a href="#detail-report" class="inline-flex items-center gap-1.5 text-xs font-medium px-5 py-2 rounded-full border border-apple-mid text-apple-sub hover:border-apple-black hover:text-apple-black transition">
+          詳細レポートを読む <span class="text-base leading-none">↓</span>
+        </a>
+      </div>
+
+      <!-- ━━━ 区切り ━━━ -->
+      <div class="border-t border-apple-mid"></div>
+
+      <!-- ━━━ 詳細レポート ━━━ -->
+      <section id="detail-report">
+        <h2 class="text-xs font-semibold text-apple-sub uppercase tracking-widest mb-8">
+          詳細レポート
+        </h2>
+
+        <div class="space-y-10">
+
+          <!-- detail-01 -->
+          <div id="detail-01" class="scroll-mt-6">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <div class="flex items-center gap-3 mb-2">
+                  <span class="badge-high text-xs font-medium px-2 py-0.5 rounded">重要（AI仮判定）</span>
+                  <span class="text-xs text-apple-sub font-light">会社法　／　法務省</span>
+                </div>
+                <h3 class="text-base font-semibold leading-snug">
+                  取締役報酬の開示要件強化（施行規則改正）
+                </h3>
+              </div>
+              <a href="#summary" class="text-xs text-apple-sub hover:text-apple-black shrink-0 ml-6 mt-1">↑ サマリーへ</a>
+            </div>
+
+            <!-- メタ情報 -->
+            <div class="grid grid-cols-3 gap-3 mb-5">
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">種別</div>
+                <div class="text-xs font-medium">政令・省令改正</div>
+              </div>
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">所管</div>
+                <div class="text-xs font-medium">法務省</div>
+              </div>
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">施行予定</div>
+                <div class="text-xs font-medium">2026年9月1日</div>
+              </div>
+            </div>
+
+            <div class="space-y-4 text-sm font-light leading-relaxed text-apple-black">
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">変更点</div>
+                <p>
+                  上場会社における取締役・執行役の個人別報酬額について、現行の任意開示から義務的開示へと要件が強化される。
+                  1億円以上の役員に加え、一定基準を超える報酬を受ける全取締役について、
+                  報酬の算定根拠・決定プロセスを事業報告および株主総会参考書類に記載することが求められる。
+                </p>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">注意が必要なクライアント</div>
+                <div class="flex flex-wrap gap-2">
+                  <span class="border border-apple-mid text-xs px-3 py-1 rounded-full">上場企業（全般）</span>
+                  <span class="border border-apple-mid text-xs px-3 py-1 rounded-full">PEファンドのポートフォリオ企業</span>
+                </div>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">実務上の対応</div>
+                <p>
+                  顧問先の上場企業に対して、定時株主総会前（施行前）に現行の報酬決定プロセスの確認と
+                  開示対応のレビューを行うことを推奨。特に指名・報酬委員会の議事録整備が重要となる。
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-3 mt-5">
+              <a href="#" class="text-xs font-medium px-4 py-2 rounded-full text-white transition" style="background:#1B48C4;">
+                法務省 原文 →
+              </a>
+              <a href="#" class="text-xs font-medium border border-apple-mid text-apple-sub px-4 py-2 rounded-full hover:border-apple-black hover:text-apple-black transition">
+                西村あさひ解説 →
+              </a>
+            </div>
+          </div>
+
+          <div class="border-t border-apple-mid"></div>
+
+          <!-- detail-03 -->
+          <div id="detail-03" class="scroll-mt-6">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <div class="flex items-center gap-3 mb-2">
+                  <span class="badge-high text-xs font-medium px-2 py-0.5 rounded">重要（AI仮判定）</span>
+                  <span class="text-xs text-apple-sub font-light">金融商品取引法　／　金融庁</span>
+                </div>
+                <h3 class="text-base font-semibold leading-snug">
+                  公開買付規制の見直し　内閣府令改正案パブコメ開始
+                </h3>
+              </div>
+              <a href="#summary" class="text-xs text-apple-sub hover:text-apple-black shrink-0 ml-6 mt-1">↑ サマリーへ</a>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3 mb-5">
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">種別</div>
+                <div class="text-xs font-medium">パブコメ（府令改正案）</div>
+              </div>
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">所管</div>
+                <div class="text-xs font-medium">金融庁</div>
+              </div>
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">意見締切</div>
+                <div class="text-xs font-medium">2026年5月12日</div>
+              </div>
+            </div>
+
+            <div class="space-y-4 text-sm font-light leading-relaxed">
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">変更点</div>
+                <p>
+                  TOBを回避する目的で行われる大量取得行為への対応として、市場内買付けを含む一定の株式取得にも
+                  公開買付規制を適用する方向で内閣府令改正案が公表された。
+                  特定の関係者と共同して3分の1超を取得する場合の規制強化が主要論点となっている。
+                </p>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">注意が必要なクライアント</div>
+                <div class="flex flex-wrap gap-2">
+                  <span class="border border-apple-mid text-xs px-3 py-1 rounded-full">上場企業（買収対象・買収者双方）</span>
+                  <span class="border border-apple-mid text-xs px-3 py-1 rounded-full">PEファンド</span>
+                  <span class="border border-apple-mid text-xs px-3 py-1 rounded-full">金融機関</span>
+                </div>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">実務上の対応</div>
+                <p>
+                  M&A案件・アクティビスト対応を抱えるクライアントに対して速やかに内容を共有する必要がある。
+                  パブコメへの意見提出を検討している場合は5月12日の期限に注意。
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-3 mt-5">
+              <a href="#" class="text-xs font-medium px-4 py-2 rounded-full text-white transition" style="background:#1B48C4;">
+                金融庁 原文 →
+              </a>
+              <a href="#" class="text-xs font-medium border border-apple-mid text-apple-sub px-4 py-2 rounded-full hover:border-apple-black hover:text-apple-black transition">
+                森・濱田解説 →
+              </a>
+            </div>
+          </div>
+
+          <div class="border-t border-apple-mid"></div>
+
+          <!-- detail-05 -->
+          <div id="detail-05" class="scroll-mt-6">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <div class="flex items-center gap-3 mb-2">
+                  <span class="badge-high text-xs font-medium px-2 py-0.5 rounded">重要（AI仮判定）</span>
+                  <span class="text-xs text-apple-sub font-light">REIT関連　／　金融庁</span>
+                </div>
+                <h3 class="text-base font-semibold leading-snug">
+                  投資法人の資産運用規制　内閣府令改正（パブコメ結果公表）
+                </h3>
+              </div>
+              <a href="#summary" class="text-xs text-apple-sub hover:text-apple-black shrink-0 ml-6 mt-1">↑ サマリーへ</a>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3 mb-5">
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">種別</div>
+                <div class="text-xs font-medium">内閣府令改正</div>
+              </div>
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">所管</div>
+                <div class="text-xs font-medium">金融庁</div>
+              </div>
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">施行予定</div>
+                <div class="text-xs font-medium">2026年7月1日</div>
+              </div>
+            </div>
+
+            <div class="space-y-4 text-sm font-light leading-relaxed">
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">変更点</div>
+                <p>
+                  投資法人による特定資産の運用に関し、利益相反管理体制の強化と
+                  運用報告書の開示内容の拡充が義務付けられる。
+                  スポンサー関連物件の取得における第三者評価の要件が明確化された点が実務上重要。
+                </p>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">注意が必要なクライアント</div>
+                <div class="flex flex-wrap gap-2">
+                  <span class="border border-apple-mid text-xs px-3 py-1 rounded-full">上場REIT（全般）</span>
+                  <span class="border border-apple-mid text-xs px-3 py-1 rounded-full">不動産ファンド・AM会社</span>
+                </div>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">実務上の対応</div>
+                <p>
+                  施行まで約3ヶ月。REITクライアントに対して、内部規程の見直しおよび
+                  次回資産取得時の手続きへの影響を早急に確認することを推奨。
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-3 mt-5">
+              <a href="#" class="text-xs font-medium px-4 py-2 rounded-full text-white transition" style="background:#1B48C4;">
+                金融庁 原文 →
+              </a>
+              <a href="#" class="text-xs font-medium border border-apple-mid text-apple-sub px-4 py-2 rounded-full hover:border-apple-black hover:text-apple-black transition">
+                長島・大野解説 →
+              </a>
+            </div>
+          </div>
+
+          <div class="border-t border-apple-mid"></div>
+
+          <!-- detail-02 中 -->
+          <div id="detail-02" class="scroll-mt-6">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <div class="flex items-center gap-3 mb-2">
+                  <span class="badge-mid text-xs font-medium px-2 py-0.5 rounded">中（AI仮判定）</span>
+                  <span class="text-xs text-apple-sub font-light">会社法　／　法務省</span>
+                </div>
+                <h3 class="text-base font-semibold leading-snug">
+                  株主総会電子提供措置　Q&amp;A改訂（法務省）
+                </h3>
+              </div>
+              <a href="#summary" class="text-xs text-apple-sub hover:text-apple-black shrink-0 ml-6 mt-1">↑ サマリーへ</a>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3 mb-5">
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">種別</div>
+                <div class="text-xs font-medium">ガイドライン・Q&A</div>
+              </div>
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">所管</div>
+                <div class="text-xs font-medium">法務省</div>
+              </div>
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">公表日</div>
+                <div class="text-xs font-medium">2026年4月10日</div>
+              </div>
+            </div>
+
+            <div class="space-y-4 text-sm font-light leading-relaxed">
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">変更点</div>
+                <p>
+                  電子提供措置に係るQ&Aが改訂され、アクセス通知の方法および
+                  ウェブサイトのアクセス障害が生じた場合の対応についての解釈が明確化された。
+                </p>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">注意が必要なクライアント</div>
+                <div class="flex flex-wrap gap-2">
+                  <span class="border border-apple-mid text-xs px-3 py-1 rounded-full">上場企業（株主総会シーズン前に確認推奨）</span>
+                </div>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">実務上の対応</div>
+                <p>
+                  6月総会を控えた上場企業クライアントに対し、今回のQ&A改訂内容を踏まえた
+                  アクセス通知文面の最終確認を促すことを推奨。特に、ウェブサイト障害時の
+                  代替措置（書面交付の可否等）について、総務担当者との事前すり合わせが有効。
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-3 mt-5">
+              <a href="#" class="text-xs font-medium px-4 py-2 rounded-full text-white transition" style="background:#1B48C4;">
+                法務省 原文 →
+              </a>
+              <a href="#" class="text-xs font-medium border border-apple-mid text-apple-sub px-4 py-2 rounded-full hover:border-apple-black hover:text-apple-black transition">
+                法務省 Q&A →
+              </a>
+            </div>
+          </div>
+
+          <div class="border-t border-apple-mid"></div>
+
+          <!-- detail-04 -->
+          <div id="detail-04" class="scroll-mt-6">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <div class="flex items-center gap-3 mb-2">
+                  <span class="badge-mid text-xs font-medium px-2 py-0.5 rounded">中（AI仮判定）</span>
+                  <span class="text-xs text-apple-sub font-light">金融商品取引法　／　金融庁</span>
+                </div>
+                <h3 class="text-base font-semibold leading-snug">
+                  有価証券報告書の記載要領改正（サステナビリティ情報拡充）
+                </h3>
+              </div>
+              <a href="#summary" class="text-xs text-apple-sub hover:text-apple-black shrink-0 ml-6 mt-1">↑ サマリーへ</a>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3 mb-5">
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">種別</div>
+                <div class="text-xs font-medium">内閣府令改正・記載要領</div>
+              </div>
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">所管</div>
+                <div class="text-xs font-medium">金融庁</div>
+              </div>
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">適用開始</div>
+                <div class="text-xs font-medium">2027年3月期より</div>
+              </div>
+            </div>
+
+            <div class="space-y-4 text-sm font-light leading-relaxed">
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">変更点</div>
+                <p>
+                  有価証券報告書における「サステナビリティに関する考え方及び取組」の記載要領が改正され、
+                  気候関連リスク・機会の定量的な開示（Scope 1・2・3排出量等）が事実上義務化される方向となった。
+                  また、人的資本の開示項目についても、人材育成方針・エンゲージメント指標等の具体的な数値開示が求められる。
+                </p>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">注意が必要なクライアント</div>
+                <div class="flex flex-wrap gap-2">
+                  <span class="border border-apple-mid text-xs px-3 py-1 rounded-full">上場企業（全般）</span>
+                  <span class="border border-apple-mid text-xs px-3 py-1 rounded-full">金融機関</span>
+                  <span class="border border-apple-mid text-xs px-3 py-1 rounded-full">IPO準備企業</span>
+                </div>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">実務上の対応</div>
+                <p>
+                  2027年3月期の有報作成に向け、開示体制の整備・サステナビリティ委員会の設置・
+                  第三者保証の要否確認を今期中に着手することを推奨。特に製造業・エネルギー関連クライアントは
+                  Scope 3算定の準備に相当の時間を要する。
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-3 mt-5">
+              <a href="#" class="text-xs font-medium px-4 py-2 rounded-full text-white transition" style="background:#1B48C4;">
+                金融庁 原文 →
+              </a>
+              <a href="#" class="text-xs font-medium border border-apple-mid text-apple-sub px-4 py-2 rounded-full hover:border-apple-black hover:text-apple-black transition">
+                アンダーソン・毛利解説 →
+              </a>
+            </div>
+          </div>
+
+          <div class="border-t border-apple-mid"></div>
+
+          <!-- detail-06 -->
+          <div id="detail-06" class="scroll-mt-6">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <div class="flex items-center gap-3 mb-2">
+                  <span class="badge-low text-xs font-medium px-2 py-0.5 rounded">参考（AI仮判定）</span>
+                  <span class="text-xs text-apple-sub font-light">REIT関連　／　国土交通省</span>
+                </div>
+                <h3 class="text-base font-semibold leading-snug">
+                  不動産特定共同事業法に関する解釈指針（国土交通省）
+                </h3>
+              </div>
+              <a href="#summary" class="text-xs text-apple-sub hover:text-apple-black shrink-0 ml-6 mt-1">↑ サマリーへ</a>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3 mb-5">
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">種別</div>
+                <div class="text-xs font-medium">解釈指針・通達</div>
+              </div>
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">所管</div>
+                <div class="text-xs font-medium">国土交通省</div>
+              </div>
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">公表日</div>
+                <div class="text-xs font-medium">2026年4月8日</div>
+              </div>
+            </div>
+
+            <div class="space-y-4 text-sm font-light leading-relaxed">
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">変更点</div>
+                <p>
+                  不特法上の「不動産特定共同事業契約」の範囲について、デジタル証券（セキュリティトークン）を
+                  活用した持分取引に係る解釈が明確化された。具体的には、ブロックチェーン上の持分移転が
+                  同法の「譲渡」に該当するか否かの判断基準が示されており、STOスキームの設計に影響する。
+                </p>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">注意が必要なクライアント</div>
+                <div class="flex flex-wrap gap-2">
+                  <span class="border border-apple-mid text-xs px-3 py-1 rounded-full">REIT・不動産ファンド</span>
+                  <span class="border border-apple-mid text-xs px-3 py-1 rounded-full">STO・デジタル証券関連</span>
+                </div>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">実務上の対応</div>
+                <p>
+                  デジタル証券スキームを検討中のクライアントに参考情報として提供。直ちに対応を要する内容ではないが、
+                  STOを利用した不動産ファンドの組成を計画している場合には詳細確認を推奨。
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-3 mt-5">
+              <a href="#" class="text-xs font-medium px-4 py-2 rounded-full text-white transition" style="background:#1B48C4;">
+                国土交通省 原文 →
+              </a>
+            </div>
+          </div>
+
+          <div class="border-t border-apple-mid"></div>
+
+          <!-- detail-07 -->
+          <div id="detail-07" class="scroll-mt-6">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <div class="flex items-center gap-3 mb-2">
+                  <span class="badge-mid text-xs font-medium px-2 py-0.5 rounded">中（AI仮判定）</span>
+                  <span class="text-xs text-apple-sub font-light">労働法　／　厚生労働省</span>
+                </div>
+                <h3 class="text-base font-semibold leading-snug">
+                  育児・介護休業法施行規則改正　子の看護休暇の拡充
+                </h3>
+              </div>
+              <a href="#summary" class="text-xs text-apple-sub hover:text-apple-black shrink-0 ml-6 mt-1">↑ サマリーへ</a>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3 mb-5">
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">種別</div>
+                <div class="text-xs font-medium">省令改正</div>
+              </div>
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">所管</div>
+                <div class="text-xs font-medium">厚生労働省</div>
+              </div>
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">施行予定</div>
+                <div class="text-xs font-medium">2026年10月1日</div>
+              </div>
+            </div>
+
+            <div class="space-y-4 text-sm font-light leading-relaxed">
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">変更点</div>
+                <p>
+                  子の看護休暇の取得対象となる子の年齢が「小学校就学前」から「小学校3年生修了まで」に引き上げられる。
+                  また、看護の対象となる事由に「感染症予防のためのワクチン接種への付き添い」および
+                  「学校行事への参加（一定要件あり）」が追加される。
+                </p>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">注意が必要なクライアント</div>
+                <div class="flex flex-wrap gap-2">
+                  <span class="border border-apple-mid text-xs px-3 py-1 rounded-full">事業会社（全般）</span>
+                  <span class="border border-apple-mid text-xs px-3 py-1 rounded-full">人事・労務管理部門を持つ企業</span>
+                </div>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">実務上の対応</div>
+                <p>
+                  就業規則・育児介護休業規程の改訂が必要。社内システム（勤怠・給与）の対象年齢区分の
+                  見直しも要する場合があるため、施行の6ヶ月前を目安に準備を開始することを推奨。
+                  顧問先の人事部門への周知を優先的に行うことが望ましい。
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-3 mt-5">
+              <a href="#" class="text-xs font-medium px-4 py-2 rounded-full text-white transition" style="background:#1B48C4;">
+                厚生労働省 原文 →
+              </a>
+              <a href="#" class="text-xs font-medium border border-apple-mid text-apple-sub px-4 py-2 rounded-full hover:border-apple-black hover:text-apple-black transition">
+                労務解説 →
+              </a>
+            </div>
+          </div>
+
+          <div class="border-t border-apple-mid"></div>
+
+          <!-- detail-08 -->
+          <div id="detail-08" class="scroll-mt-6">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <div class="flex items-center gap-3 mb-2">
+                  <span class="badge-mid text-xs font-medium px-2 py-0.5 rounded">中（AI仮判定）</span>
+                  <span class="text-xs text-apple-sub font-light">ジェネラルコーポレート　／　個人情報保護委員会</span>
+                </div>
+                <h3 class="text-base font-semibold leading-snug">
+                  個人情報保護法ガイドライン改訂（委託先管理の強化）
+                </h3>
+              </div>
+              <a href="#summary" class="text-xs text-apple-sub hover:text-apple-black shrink-0 ml-6 mt-1">↑ サマリーへ</a>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3 mb-5">
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">種別</div>
+                <div class="text-xs font-medium">ガイドライン改訂</div>
+              </div>
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">所管</div>
+                <div class="text-xs font-medium">個人情報保護委員会</div>
+              </div>
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">公表日</div>
+                <div class="text-xs font-medium">2026年4月9日</div>
+              </div>
+            </div>
+
+            <div class="space-y-4 text-sm font-light leading-relaxed">
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">変更点</div>
+                <p>
+                  個人情報保護法ガイドライン（通則編）が改訂され、委託先の監督義務に関する解釈が強化された。
+                  特に、クラウドサービス事業者・AIベンダー等への個人データの提供について、
+                  「適切な安全管理措置」の確認方法として、契約条項の整備のみならず
+                  定期的な実地調査または第三者認証の確認を求める内容が追記された。
+                </p>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">注意が必要なクライアント</div>
+                <div class="flex flex-wrap gap-2">
+                  <span class="border border-apple-mid text-xs px-3 py-1 rounded-full">事業会社（全般）</span>
+                  <span class="border border-apple-mid text-xs px-3 py-1 rounded-full">金融機関</span>
+                  <span class="border border-apple-mid text-xs px-3 py-1 rounded-full">SaaS・クラウド利用企業</span>
+                </div>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">実務上の対応</div>
+                <p>
+                  既存のクラウド・AI利用に係るデータ処理委託契約を見直し、委託先の安全管理措置の
+                  確認フローを整備することを推奨。特に生成AIサービスへの個人データ入力を行っている
+                  クライアントについては、利用規約の再点検と社内ポリシーの更新が急務となる。
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-3 mt-5">
+              <a href="#" class="text-xs font-medium px-4 py-2 rounded-full text-white transition" style="background:#1B48C4;">
+                個人情報保護委員会 原文 →
+              </a>
+              <a href="#" class="text-xs font-medium border border-apple-mid text-apple-sub px-4 py-2 rounded-full hover:border-apple-black hover:text-apple-black transition">
+                事務所解説 →
+              </a>
+            </div>
+          </div>
+
+          <div class="border-t border-apple-mid"></div>
+
+          <!-- detail-09 -->
+          <div id="detail-09" class="scroll-mt-6">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <div class="flex items-center gap-3 mb-2">
+                  <span class="badge-low text-xs font-medium px-2 py-0.5 rounded">参考（AI仮判定）</span>
+                  <span class="text-xs text-apple-sub font-light">ジェネラルコーポレート　／　最高裁判所</span>
+                </div>
+                <h3 class="text-base font-semibold leading-snug">
+                  最高裁判決　取締役第三者責任（会社法429条）の判断基準
+                </h3>
+              </div>
+              <a href="#summary" class="text-xs text-apple-sub hover:text-apple-black shrink-0 ml-6 mt-1">↑ サマリーへ</a>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3 mb-5">
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">種別</div>
+                <div class="text-xs font-medium">最高裁判決</div>
+              </div>
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">裁判所</div>
+                <div class="text-xs font-medium">最高裁判所第二小法廷</div>
+              </div>
+              <div class="bg-apple-gray rounded-xl px-4 py-3">
+                <div class="text-xs text-apple-sub mb-1 font-light">判決日</div>
+                <div class="text-xs font-medium">2026年4月3日</div>
+              </div>
+            </div>
+
+            <div class="space-y-4 text-sm font-light leading-relaxed">
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">判決の概要</div>
+                <p>
+                  会社法429条1項に基づく取締役の第三者に対する損害賠償責任について、
+                  「悪意または重大な過失」の認定基準が改めて示された。本件では、財務状況の悪化を認識しながら
+                  取引先への適時の情報開示を怠った社外取締役についても、監視義務違反による重過失が認定された。
+                  社外取締役の責任範囲について実務上重要な先例となり得る。
+                </p>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">注意が必要なクライアント</div>
+                <div class="flex flex-wrap gap-2">
+                  <span class="border border-apple-mid text-xs px-3 py-1 rounded-full">上場企業（社外取締役就任者）</span>
+                  <span class="border border-apple-mid text-xs px-3 py-1 rounded-full">事業会社（全般）</span>
+                </div>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-apple-sub mb-1.5">実務上の対応</div>
+                <p>
+                  社外取締役を務めるクライアントや、社外取締役候補者への助言を行う際の参考判例として共有。
+                  直ちに対応が必要な内容ではないが、役員賠償責任保険（D&O保険）の補償範囲の
+                  見直しを検討する契機としても有益。
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-3 mt-5">
+              <a href="#" class="text-xs font-medium px-4 py-2 rounded-full text-white transition" style="background:#1B48C4;">
+                裁判所 判決文 →
+              </a>
+              <a href="#" class="text-xs font-medium border border-apple-mid text-apple-sub px-4 py-2 rounded-full hover:border-apple-black hover:text-apple-black transition">
+                判例解説 →
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- フッター -->
+      <div class="border-t border-apple-mid pt-6 space-y-1">
+        <p class="text-xs text-apple-sub font-light border border-apple-mid rounded-lg px-4 py-3 leading-relaxed mb-3">
+          重要度はAIによる仮判定です。最終的な判断は一次情報源にてご確認ください。
+        </p>
+        <p class="text-xs text-apple-sub font-light">このメールはLegal Update Systemにより自動生成されました。</p>
+        <p class="text-xs text-apple-sub font-light">次回配信：2026年4月20日（月）07:00</p>
+        <p class="text-xs text-apple-sub font-light">配信設定の変更は legalupdate-admin@firm.com までご連絡ください。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- フローティング「トップへ」ボタン -->
+  <button id="scrollTopBtn"
+    onclick="window.scrollTo({top:0,behavior:'smooth'})"
+    class="fixed bottom-6 right-6 w-10 h-10 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 opacity-0 pointer-events-none"
+    style="background:#1d1d1f; color:#fff; font-size:1rem;"
+    aria-label="ページトップへ">
+    ↑
+  </button>
+  <script>
+    const btn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        btn.style.opacity = '1';
+        btn.style.pointerEvents = 'auto';
+      } else {
+        btn.style.opacity = '0';
+        btn.style.pointerEvents = 'none';
+      }
+    });
+  </script>
+
+</body>
+</html>

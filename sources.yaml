@@ -1,0 +1,481 @@
+# =============================================================================
+# Legal Update System - Sources Configuration
+# =============================================================================
+# 週次法令アップデート配信のソース定義ファイル。
+# 取得スクリプト・AI要約・UIフィルタの全てがこの定義を参照する。
+#
+# スキーマ:
+#   id              : 一意識別子 (snake_case)
+#   name            : 表示名
+#   category        : 法令カテゴリ (会社法 / 金融商品取引法 / REIT関連 / 労働法 / ジェネラルコーポレート)
+#                     ※ 一つのソースから複数カテゴリの記事が出る場合は配列で複数指定
+#   practice_area   : 該当プラクティス (コーポレート / CM / REIT / PE / M&A / 労働 / GC)
+#   source_type     : primary (公的機関) / secondary (事務所NL) / journal (商業誌)
+#   fetch_method    : rss / api / scrape / email_subscription / manual
+#   url             : メインURL (人間が確認する用)
+#   feed_url        : 機械可読フィード (RSS/API) のエンドポイント
+#   list_page_url   : スクレイプ時の新着一覧ページ
+#   priority_weight : 重要度判定の重み係数 (デフォルト 1.0、二次ソースは 0.0=本文には使うがアイテム化しない)
+#   active          : 取得有効フラグ
+#   notes           : 運用メモ
+#
+# 注意:
+#   - URL は初期ドラフトのため、実装前に各サイトで現行URLを再確認すること。
+#   - 二次ソース(secondary) は「リンク提示」と「AI要約の参考資料」として使用するが、
+#     一次ソース不在の場合に単独でアイテム化することはしない (priority_weight: 0.0)。
+#   - 過去アイテムへの続報判定は、source_type を問わず全ソースで実施する。
+# =============================================================================
+
+sources:
+
+  # ===========================================================================
+  # 横断ポータル
+  # ===========================================================================
+
+  - id: egov_public_comment
+    name: e-Gov パブリックコメント
+    category: [会社法, 金融商品取引法, REIT関連, 労働法, ジェネラルコーポレート]
+    practice_area: [コーポレート, CM, REIT, PE, M&A, 労働, GC]
+    source_type: primary
+    fetch_method: api
+    url: https://public-comment.e-gov.go.jp/
+    feed_url: https://public-comment.e-gov.go.jp/servlet/Public  # 要確認: 検索API or RSS
+    priority_weight: 1.2
+    active: true
+    notes: 全省庁のパブコメ集約。施行前情報の最重要ソース。意見締切日をメタ情報として確実に取得する。
+
+  # ===========================================================================
+  # コーポレート / 会社法
+  # ===========================================================================
+
+  - id: moj_minji_news
+    name: 法務省 民事局 新着情報
+    category: [会社法, ジェネラルコーポレート]
+    practice_area: [コーポレート, M&A, GC]
+    source_type: primary
+    fetch_method: scrape
+    url: https://www.moj.go.jp/MINJI/index.html
+    list_page_url: https://www.moj.go.jp/MINJI/index.html
+    priority_weight: 1.0
+    active: true
+    notes: 法制審議会会社法部会の答申・中間試案・要綱もここから辿る。RSSなしのためHTMLスクレイプ。
+
+  - id: moj_legislative_council
+    name: 法制審議会 (会社法部会・関連部会)
+    category: [会社法]
+    practice_area: [コーポレート, M&A]
+    source_type: primary
+    fetch_method: scrape
+    url: https://www.moj.go.jp/shingi1/shingikai_index.html
+    priority_weight: 1.1
+    active: true
+    notes: 部会の議事録・配布資料が更新される。改正の方向性把握に有用。
+
+  - id: meti_corporate_governance
+    name: 経産省 企業統治・CGS研究会
+    category: [会社法, ジェネラルコーポレート]
+    practice_area: [コーポレート]
+    source_type: primary
+    fetch_method: scrape
+    url: https://www.meti.go.jp/policy/economy/keiei_innovation/keizaihousei/
+    priority_weight: 0.9
+    active: true
+    notes: 社外取締役ガイドライン、グループガバナンス指針等のソフトロー。
+
+  - id: jpx_listing_rules
+    name: 東証 上場制度・CGコード
+    category: [会社法, 金融商品取引法]
+    practice_area: [コーポレート, CM]
+    source_type: primary
+    fetch_method: scrape
+    url: https://www.jpx.co.jp/equities/listing/cg/
+    list_page_url: https://www.jpx.co.jp/news/index.html
+    priority_weight: 1.0
+    active: true
+    notes: CGコード改訂、上場規則改正、適時開示規則。上場企業実務に直結。
+
+  - id: supreme_court_cases
+    name: 最高裁判所 裁判例検索
+    category: [会社法, ジェネラルコーポレート]
+    practice_area: [コーポレート, M&A, GC]
+    source_type: primary
+    fetch_method: manual
+    url: https://www.courts.go.jp/app/hanrei_jp/search1
+    priority_weight: 1.0
+    active: false  # 自動取得困難。当面は商事法務速報・事務所NL経由で補完
+    notes: PDFのみで自動取得が難しい。商事法務・ジュリスト・事務所NLで補完する運用。
+
+  # ===========================================================================
+  # キャピタルマーケッツ / 金商法
+  # ===========================================================================
+
+  - id: fsa_news
+    name: 金融庁 報道発表
+    category: [金融商品取引法, REIT関連, 会社法]
+    practice_area: [CM, REIT, PE, M&A, コーポレート]
+    source_type: primary
+    fetch_method: rss
+    url: https://www.fsa.go.jp/news/index.html
+    feed_url: https://www.fsa.go.jp/fsaNewsListAll_rss2.xml
+    priority_weight: 1.2
+    active: true
+    notes: |
+      最頻出の重要ソース。府令改正・監督指針改正・パブコメ告知が集約される。
+      RSS の <title> 先頭に「採用,」「記者会見,」「国際関係,」「その他,」等のカテゴリ接頭辞が付く。
+      法令アップデートに無関係なカテゴリ（採用・調達等）は事前フィルタする。
+      <description> は空のため、本文は <link> 先 HTML を別途取得して抽出する。
+
+  - id: fsa_public_comment
+    name: 金融庁 パブリックコメント
+    category: [金融商品取引法, REIT関連]
+    practice_area: [CM, REIT, PE, M&A]
+    source_type: primary
+    fetch_method: scrape
+    url: https://www.fsa.go.jp/news/public_comment.html  # 要確認
+    priority_weight: 1.2
+    active: true
+    notes: e-Govと重複するが金融庁単独のパブコメも掲載。両方取得して重複排除。
+
+  - id: jpx_self_regulation
+    name: 日本取引所自主規制法人
+    category: [金融商品取引法, 会社法]
+    practice_area: [CM, コーポレート]
+    source_type: primary
+    fetch_method: scrape
+    url: https://www.jpx.co.jp/regulation/
+    priority_weight: 0.9
+    active: true
+    notes: 自主規制ルール改正、上場会社向けガイダンス。
+
+  # ===========================================================================
+  # REIT / 不動産ファンド
+  # ===========================================================================
+
+  - id: mlit_real_estate
+    name: 国土交通省 不動産・建設経済局
+    category: [REIT関連]
+    practice_area: [REIT]
+    source_type: primary
+    fetch_method: scrape
+    url: https://www.mlit.go.jp/totikensangyo/index.html
+    priority_weight: 1.0
+    active: true
+    notes: 不動産特定共同事業法、宅建業法関連の通達・解釈。
+
+  - id: ares_news
+    name: 不動産証券化協会 (ARES)
+    category: [REIT関連]
+    practice_area: [REIT]
+    source_type: primary
+    fetch_method: scrape
+    url: https://www.ares.or.jp/
+    priority_weight: 0.8
+    active: true
+    notes: 業界自主ルール、税制要望、解釈集約。一次ソースだが性質は半官半民。
+
+  - id: toushin_kyokai
+    name: 投資信託協会
+    category: [REIT関連]
+    practice_area: [REIT]
+    source_type: primary
+    fetch_method: scrape
+    url: https://www.toushin.or.jp/
+    priority_weight: 0.7
+    active: true
+    notes: 投信法の運用面、自主規制規則改正。
+
+  # ===========================================================================
+  # PE / M&A
+  # ===========================================================================
+
+  - id: jftc_news
+    name: 公正取引委員会 報道発表
+    category: [ジェネラルコーポレート]
+    practice_area: [M&A, PE, GC]
+    source_type: primary
+    fetch_method: rss
+    url: https://www.jftc.go.jp/houdou/index.html
+    feed_url: https://www.jftc.go.jp/rss/news.xml  # 要確認
+    priority_weight: 1.0
+    active: true
+    notes: 企業結合審査事例、独禁法ガイドライン改正、下請法。M&A実務に直結。
+
+  - id: jftc_merger_review
+    name: 公取委 企業結合審査
+    category: [ジェネラルコーポレート]
+    practice_area: [M&A, PE]
+    source_type: primary
+    fetch_method: scrape
+    url: https://www.jftc.go.jp/dk/kiketsu/index.html
+    priority_weight: 1.0
+    active: true
+    notes: 主要事例の公表、ガイドライン改訂。
+
+  - id: meti_ma_guideline
+    name: 経産省 公正なM&Aの在り方に関する指針
+    category: [会社法, ジェネラルコーポレート]
+    practice_area: [M&A, PE, コーポレート]
+    source_type: primary
+    fetch_method: scrape
+    url: https://www.meti.go.jp/policy/economy/keiei_innovation/keizaihousei/
+    priority_weight: 1.0
+    active: true
+    notes: MBO・支配株主による従属会社買収等の指針。改訂頻度は低いが影響大。
+
+  # ===========================================================================
+  # 労働法
+  # ===========================================================================
+
+  - id: mhlw_news
+    name: 厚生労働省 報道発表
+    category: [労働法]
+    practice_area: [労働, GC]
+    source_type: primary
+    fetch_method: rss
+    url: https://www.mhlw.go.jp/stf/houdou/index.html
+    feed_url: https://www.mhlw.go.jp/stf/news.rdf  # 要確認
+    priority_weight: 1.0
+    active: true
+    notes: 労基法・育介法・労働契約法関連の改正・通達。
+
+  - id: mhlw_labor_council
+    name: 労働政策審議会
+    category: [労働法]
+    practice_area: [労働]
+    source_type: primary
+    fetch_method: scrape
+    url: https://www.mhlw.go.jp/stf/shingi/shingi-rousei.html
+    priority_weight: 0.9
+    active: true
+    notes: 改正の方向性をいち早く把握。
+
+  # ===========================================================================
+  # ジェネラルコーポレート (横断的)
+  # ===========================================================================
+
+  - id: ppc_news
+    name: 個人情報保護委員会
+    category: [ジェネラルコーポレート]
+    practice_area: [GC, コーポレート]
+    source_type: primary
+    fetch_method: rss
+    url: https://www.ppc.go.jp/news/
+    feed_url: https://www.ppc.go.jp/rss/news.xml  # 要確認
+    priority_weight: 1.1
+    active: true
+    notes: ガイドライン改訂、Q&A更新、行政処分事例。クラウド/AI関連で頻出。
+
+  - id: caa_news
+    name: 消費者庁 新着情報
+    category: [ジェネラルコーポレート]
+    practice_area: [GC]
+    source_type: primary
+    fetch_method: scrape
+    url: https://www.caa.go.jp/notice/
+    priority_weight: 0.8
+    active: true
+    notes: 特商法、景表法、消費者契約法。BtoC事業者向け。
+
+  - id: digital_agency
+    name: デジタル庁
+    category: [ジェネラルコーポレート]
+    practice_area: [GC]
+    source_type: primary
+    fetch_method: scrape
+    url: https://www.digital.go.jp/news
+    priority_weight: 0.7
+    active: true
+    notes: 電子化・DX関連法令、マイナンバー、デジタル原則適合性確認。
+
+  # ===========================================================================
+  # 二次ソース: 大手4事務所ニュースレター
+  # ===========================================================================
+  # priority_weight: 0.0 = 単独でアイテム化しない。AI要約・実務影響分析の参考資料および
+  # リンク提示のみに使用。
+
+  - id: nl_nishimura
+    name: 西村あさひ法律事務所 ニュースレター
+    category: [会社法, 金融商品取引法, REIT関連, 労働法, ジェネラルコーポレート]
+    practice_area: [コーポレート, CM, REIT, PE, M&A, 労働, GC]
+    source_type: secondary
+    fetch_method: scrape
+    url: https://www.nishimura.com/ja/newsletters
+    list_page_url: https://www.nishimura.com/ja/newsletters
+    priority_weight: 0.0
+    active: true
+    notes: 業務分野別に整理されており参照しやすい。
+
+  - id: nl_mhm
+    name: 森・濱田松本法律事務所 ニュースレター
+    category: [会社法, 金融商品取引法, REIT関連, 労働法, ジェネラルコーポレート]
+    practice_area: [コーポレート, CM, REIT, PE, M&A, 労働, GC]
+    source_type: secondary
+    fetch_method: scrape
+    url: https://www.mhmjapan.com/ja/publications/newsletter.html
+    priority_weight: 0.0
+    active: true
+
+  - id: nl_nagashima
+    name: 長島・大野・常松法律事務所 ニュースレター
+    category: [会社法, 金融商品取引法, REIT関連, 労働法, ジェネラルコーポレート]
+    practice_area: [コーポレート, CM, REIT, PE, M&A, 労働, GC]
+    source_type: secondary
+    fetch_method: scrape
+    url: https://www.noandt.com/publications/
+    priority_weight: 0.0
+    active: true
+    notes: M&A・REIT分野に特に強い。
+
+  - id: nl_amt
+    name: アンダーソン・毛利・友常法律事務所 ニュースレター
+    category: [会社法, 金融商品取引法, REIT関連, 労働法, ジェネラルコーポレート]
+    practice_area: [コーポレート, CM, REIT, PE, M&A, 労働, GC]
+    source_type: secondary
+    fetch_method: scrape
+    url: https://www.amt-law.com/publications/
+    priority_weight: 0.0
+    active: true
+
+  # ===========================================================================
+  # 二次ソース: 中堅事務所ニュースレター
+  # ===========================================================================
+
+  - id: nl_tmi
+    name: TMI総合法律事務所
+    category: [会社法, 金融商品取引法, ジェネラルコーポレート]
+    practice_area: [コーポレート, CM, M&A, GC]
+    source_type: secondary
+    fetch_method: scrape
+    url: https://www.tmi.gr.jp/news.html
+    priority_weight: 0.0
+    active: true
+
+  - id: nl_city_yuwa
+    name: シティユーワ法律事務所
+    category: [会社法, 金融商品取引法, ジェネラルコーポレート]
+    practice_area: [コーポレート, CM, M&A, GC]
+    source_type: secondary
+    fetch_method: scrape
+    url: https://www.city-yuwa.com/news/index.html
+    priority_weight: 0.0
+    active: true
+
+  - id: nl_iwatagodo
+    name: 岩田合同法律事務所
+    category: [会社法, 金融商品取引法, ジェネラルコーポレート, 労働法]
+    practice_area: [コーポレート, M&A, GC, 労働]
+    source_type: secondary
+    fetch_method: scrape
+    url: https://www.iwatagodo.com/topics/
+    priority_weight: 0.0
+    active: true
+
+  - id: nl_aiklaw
+    name: 阿部・井窪・片山法律事務所
+    category: [会社法, ジェネラルコーポレート]
+    practice_area: [コーポレート, M&A, GC]
+    source_type: secondary
+    fetch_method: scrape
+    url: https://www.aiklaw.co.jp/publication/
+    priority_weight: 0.0
+    active: true
+
+  - id: nl_miura
+    name: 三浦法律事務所
+    category: [会社法, 金融商品取引法, ジェネラルコーポレート]
+    practice_area: [コーポレート, CM, M&A, PE]
+    source_type: secondary
+    fetch_method: scrape
+    url: https://www.miura-partners.com/publications/
+    priority_weight: 0.0
+    active: true
+    notes: M&A・PE案件に強い。
+
+  - id: nl_baker
+    name: ベーカー&マッケンジー法律事務所
+    category: [会社法, 金融商品取引法, ジェネラルコーポレート]
+    practice_area: [コーポレート, CM, M&A, GC]
+    source_type: secondary
+    fetch_method: scrape
+    url: https://www.bakermckenzie.co.jp/publications/
+    priority_weight: 0.0
+    active: true
+
+  - id: nl_atsumi
+    name: 渥美坂井法律事務所・外国法共同事業
+    category: [会社法, ジェネラルコーポレート]
+    practice_area: [コーポレート, M&A, GC]
+    source_type: secondary
+    fetch_method: scrape
+    url: https://www.aplaw.jp/publications/
+    priority_weight: 0.0
+    active: true
+
+  - id: nl_ushijima
+    name: 牛島総合法律事務所
+    category: [会社法, ジェネラルコーポレート]
+    practice_area: [コーポレート, M&A, GC]
+    source_type: secondary
+    fetch_method: scrape
+    url: https://www.ushijima-law.gr.jp/news/
+    priority_weight: 0.0
+    active: true
+
+  - id: nl_oh_ebashi
+    name: 大江橋法律事務所
+    category: [会社法, 金融商品取引法, REIT関連]
+    practice_area: [コーポレート, CM, REIT, M&A]
+    source_type: secondary
+    fetch_method: scrape
+    url: https://www.ohebashi.com/jp/newsletter/
+    priority_weight: 0.0
+    active: true
+    notes: 関西系。REIT・金商法に強い。
+
+  # ===========================================================================
+  # 商業誌・ジャーナル
+  # ===========================================================================
+
+  - id: shoji_homu_portal
+    name: 商事法務ポータル
+    category: [会社法, 金融商品取引法, REIT関連, ジェネラルコーポレート]
+    practice_area: [コーポレート, CM, REIT, PE, M&A, GC]
+    source_type: journal
+    fetch_method: scrape
+    url: https://portal.shojihomu.jp/
+    priority_weight: 0.5
+    active: true
+    notes: 旬刊商事法務、判例速報、立法情報。コーポレート分野の中核ジャーナル。判例カバーの主軸。
+
+  - id: nbl
+    name: NBL (商事法務)
+    category: [会社法, 金融商品取引法, ジェネラルコーポレート]
+    practice_area: [コーポレート, CM, M&A, GC]
+    source_type: journal
+    fetch_method: manual
+    url: https://www.shojihomu.co.jp/web/nbl
+    priority_weight: 0.5
+    active: false
+    notes: 月2回刊。実務記事中心。手動チェックの想定。
+
+  - id: jurist
+    name: ジュリスト (有斐閣)
+    category: [会社法, ジェネラルコーポレート]
+    practice_area: [コーポレート, M&A, GC]
+    source_type: journal
+    fetch_method: manual
+    url: https://www.yuhikaku.co.jp/jurist
+    priority_weight: 0.5
+    active: false
+    notes: 判例研究・学説。手動チェックの想定。
+
+  - id: kinyu_homu
+    name: 金融法務事情
+    category: [金融商品取引法, REIT関連]
+    practice_area: [CM, REIT]
+    source_type: journal
+    fetch_method: manual
+    url: https://www.kinzai.jp/
+    priority_weight: 0.5
+    active: false
+    notes: 金融分野の判例・実務記事。手動チェックの想定。

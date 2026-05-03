@@ -1,0 +1,56 @@
+name: Weekly Legal Update Digest
+
+on:
+  schedule:
+    # 毎週月曜 07:00 JST = 日曜 22:00 UTC
+    - cron: '0 22 * * 0'
+  # 手動実行 (リポジトリ Actions タブの "Run workflow" ボタンから)
+  workflow_dispatch:
+
+# GitHub Pages デプロイに必要な権限
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同時実行を抑制 (複数の手動実行が重なった場合、新しい方を待たせる)
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'  # 3.14 は Actions ランナーへの普及が遅れているため安定版を採用
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run pipeline (fetch → score → summarize → render)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python src/main.py
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: output
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
