@@ -1,2 +1,0 @@
-- [User profile](user_profile.md) — AIスクール受講生、プログラミング初心者寄り。説明は丁寧に、メジャーなツールを優先
-- [Project: Legal Update System](project_legal_update.md) — 週次法令アップデート配信。Python + Claude API + GitHub Actions、プロトタイプ先行で構築中
