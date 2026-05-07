@@ -24,6 +24,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SUMMARIZED_PATH = ROOT / "output" / "summarized.json"
 TEMPLATES_DIR = ROOT / "templates"
 OUTPUT_HTML = ROOT / "output" / "index.html"
+OUTPUT_EMAIL_HTML = ROOT / "output" / "email.html"
 
 JST = timezone(timedelta(hours=9))
 
@@ -106,13 +107,21 @@ def main() -> None:
         trim_blocks=False,
         lstrip_blocks=False,
     )
-    template = env.get_template("digest.html.j2")
-    html = template.render(**context)
 
+    # Web版 (リッチ表示用): GitHub Pages のメインページ
+    web_html = env.get_template("digest.html.j2").render(**context)
     OUTPUT_HTML.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT_HTML.write_text(html, encoding="utf-8")
+    OUTPUT_HTML.write_text(web_html, encoding="utf-8")
 
-    print(f"レンダリング完了: {len(items)}件 → {OUTPUT_HTML}")
+    # メール版 (Outlook/M365 などの厳格なメールクライアント向け):
+    # インライン CSS + table レイアウト + JS/外部リソース禁止。
+    # GAS が UrlFetchApp で取得し GmailApp.sendEmail() で送信する想定。
+    email_html = env.get_template("digest_email.html.j2").render(**context)
+    OUTPUT_EMAIL_HTML.write_text(email_html, encoding="utf-8")
+
+    print(f"レンダリング完了: {len(items)}件")
+    print(f"  Web版   → {OUTPUT_HTML}")
+    print(f"  メール版 → {OUTPUT_EMAIL_HTML}")
     print(f"  重要={counts['high']} / 中={counts['mid']} / 参考={counts['low']}")
 
 

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+{# ============================================================
+   メール専用テンプレート (HTMLメール用)
+
+   設計上の制約:
+   - <script> および 外部 <link rel="stylesheet"> 禁止
+       → Outlook / M365 Defender でブロックされやすい
+   - すべての見た目は インライン style="..." で指定
+       → 多くのメールクライアントが <style> を無視するため
+   - レイアウトは <table role="presentation"> ベース
+       → Outlook (Windows) は Word の HTML エンジンで描画するため
+         flex / grid が効かない。table が最も互換性が高い
+   - フォントは Web Safe のみ
+       → Google Fonts 等は読み込まれないクライアントが多い
+   - 画像・外部リソースは原則使わない
+       → プライバシー設定でブロックされると崩れる
+   ============================================================ #}
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>法令アップデート {{ week_range }}</title>
+</head>
+<body style="margin:0; padding:0; background-color:#f5f5f7; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Helvetica,Arial,sans-serif; color:#1d1d1f;">
+
+  {# 外側テーブル: 全幅・中央寄せの土台 #}
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f5f5f7;">
+    <tr>
+      <td align="center" style="padding:24px 12px;">
+
+        {# 本体テーブル: 600px が業界標準。Outlook で安定する横幅 #}
+        <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px; width:100%; background-color:#ffffff; border-radius:8px;">
+
+          {# ━━━ ヘッダー ━━━ #}
+          <tr>
+            <td style="padding:32px 32px 24px; border-bottom:1px solid #d2d2d7;">
+              <p style="margin:0 0 4px; font-size:11px; color:#6e6e73; letter-spacing:0.5px;">
+                Legal Update System
+              </p>
+              <p style="margin:0 0 20px; font-size:11px; color:#6e6e73;">
+                {{ send_datetime }}
+              </p>
+              <h1 style="margin:0; font-size:28px; font-weight:700; color:#1d1d1f; line-height:1.2;">
+                The Brief
+              </h1>
+              <p style="margin:6px 0 0; font-size:13px; color:#6e6e73;">
+                {{ week_range }}
+              </p>
+
+              {# 件数サマリー: テーブルで横並び (flex の代替) #}
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:20px;">
+                <tr>
+                  <td align="center" style="padding-right:20px; border-right:1px solid #d2d2d7;">
+                    <div style="font-size:24px; font-weight:600; color:#1B48C4; line-height:1;">{{ count_high }}</div>
+                    <div style="font-size:11px; color:#1B48C4; font-weight:500; margin-top:4px;">重要</div>
+                  </td>
+                  <td align="center" style="padding:0 20px; border-right:1px solid #d2d2d7;">
+                    <div style="font-size:24px; font-weight:600; color:#1d1d1f; line-height:1;">{{ count_mid }}</div>
+                    <div style="font-size:11px; color:#6e6e73; margin-top:4px;">中</div>
+                  </td>
+                  <td align="center" style="padding-left:20px;">
+                    <div style="font-size:24px; font-weight:600; color:#1d1d1f; line-height:1;">{{ count_low }}</div>
+                    <div style="font-size:11px; color:#6e6e73; margin-top:4px;">参考</div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          {# ━━━ カテゴリ別アイテム一覧 ━━━ #}
+          <tr>
+            <td style="padding:8px 32px 24px;">
+              {% for category in categories %}
+                <h2 style="margin:24px 0 12px; padding-bottom:8px; font-size:14px; font-weight:700; color:#1d1d1f; border-bottom:1px solid #d2d2d7;">
+                  {{ category.name }}
+                </h2>
+
+                {% for item in category["items"] %}
+                  {# 重要度に応じてバッジ色・サイドバー色を切り替え #}
+                  {% if item.importance == 'high' %}
+                    {% set badge_bg = '#1B48C4' %}
+                    {% set badge_color = '#ffffff' %}
+                    {% set badge_label = '重要' %}
+                    {% set bar_color = '#1B48C4' %}
+                  {% elif item.importance == 'mid' %}
+                    {% set badge_bg = '#6e6e73' %}
+                    {% set badge_color = '#ffffff' %}
+                    {% set badge_label = '中' %}
+                    {% set bar_color = '#6e6e73' %}
+                  {% else %}
+                    {% set badge_bg = '#e5e5ea' %}
+                    {% set badge_color = '#6e6e73' %}
+                    {% set badge_label = '参考' %}
+                    {% set bar_color = '#d2d2d7' %}
+                  {% endif %}
+
+                  {# アイテム単位のテーブル: 左サイドバー + コンテンツ #}
+                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:8px;">
+                    <tr>
+                      <td style="border-left:3px solid {{ bar_color }}; padding:10px 14px;">
+                        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                          <tr>
+                            <td valign="top" style="width:48px; padding-right:12px;">
+                              <span style="display:inline-block; padding:2px 8px; font-size:10px; font-weight:500; background-color:{{ badge_bg }}; color:{{ badge_color }}; border-radius:3px; white-space:nowrap;">
+                                {{ badge_label }}
+                              </span>
+                            </td>
+                            <td valign="top">
+                              <a href="{{ item.url }}" target="_blank" style="color:#1d1d1f; text-decoration:none;">
+                                <div style="font-size:14px; font-weight:500; line-height:1.4; margin-bottom:4px;">
+                                  {{ item.headline }}
+                                </div>
+                              </a>
+                              <div style="font-size:11px; color:#6e6e73; line-height:1.4;">
+                                {%- if item.affected_clients -%}
+                                  {{ item.affected_clients[0] }}
+                                {%- endif -%}
+                                {%- if item.key_date and item.key_date.date_str -%}
+                                  　／　{{ item.key_date.label }}：{{ item.key_date.date_str }}
+                                {%- endif -%}
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                {% endfor %}
+              {% endfor %}
+            </td>
+          </tr>
+
+          {# ━━━ フッター: Webフルビューへの導線 ━━━ #}
+          <tr>
+            <td style="padding:24px 32px 32px; border-top:1px solid #d2d2d7; text-align:center;">
+              <p style="margin:0 0 14px; font-size:12px; color:#6e6e73;">
+                詳細レポート・サマリービューは Web 版でご覧いただけます
+              </p>
+              <a href="https://yuuukimachida-lang.github.io/legal-update-system/" target="_blank"
+                 style="display:inline-block; padding:10px 22px; background-color:#1d1d1f; color:#ffffff; text-decoration:none; border-radius:6px; font-size:13px; font-weight:500;">
+                Web 版を開く
+              </a>
+              <p style="margin:24px 0 0; font-size:11px; color:#6e6e73; line-height:1.5;">
+                このメールは Google Apps Script から自動配信されています。<br />
+                次回配信予定: {{ next_send_date }}
+              </p>
+            </td>
+          </tr>
+
+        </table>
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>
